@@ -11,7 +11,7 @@ COPY . /var/www/html
 RUN chown -R www-data:www-data /var/www/html
 
 # Exponha a porta do Apache (porta padrão 80, mapeada externamente para 8000 ou a que precisar)
-EXPOSE 80
+EXPOSE 5016
 
 # Inicia o Apache em modo de primeiro plano
 CMD ["apache2-foreground"]
