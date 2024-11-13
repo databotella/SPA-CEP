@@ -39,10 +39,11 @@
 nav {
   position: fixed;
   top: 0;
+  left: 0; /* Garante que o nav começa do lado esquerdo */
+  right: 0; /* Garante que o nav termine do lado direito */
   width: 100%;
   padding: 10px 0;
   background-color: rgba(0, 0, 50, 0.8);
-  text-align: center;
   z-index: 1000;
   display: flex;
   justify-content: center;
@@ -50,6 +51,7 @@ nav {
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
   transform: translateY(-100%);
   animation: slideDown 0.5s ease forwards;
+  box-sizing: border-box;
 }
 
 /* Animação de deslize para a barra de navegação */
