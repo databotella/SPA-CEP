@@ -97,7 +97,7 @@
 		this.loading = true;
   
 		axios
-		.get(`http://backend:80/?cep=${this.cep}`)
+		.get(`https://app-uhback.szmxvf.easypanel.host/?cep=${this.cep}`)
 		  .then((response) => {
 			if (response.data.erro) {
 			  alert('CEP não encontrado.');
