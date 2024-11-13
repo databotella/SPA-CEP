@@ -8,4 +8,4 @@ COPY . /var/www/html
 RUN chown -R www-data:www-data /var/www/html
 
 # Exponha a porta padrão do Apache
-EXPOSE 80
+EXPOSE 5016

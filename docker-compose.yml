@@ -1,21 +1,19 @@
-version: '3'
-
 services:
   backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
     ports:
-      - "8000:80"
+      - "5016:5016" # Mapeia a porta 5016 do host para a porta 5016 do container
     networks:
       - app-network
 
   frontend:
     build:
-      context: ./frontend
+      context: ./cep-spa
       dockerfile: Dockerfile
     ports:
-      - "8080:80"
+      - "5015:5015" # Mapeia a porta 5015 do host para a porta 5015 do container
     networks:
       - app-network
 
