@@ -167,182 +167,198 @@
   </script>
   
   <style scoped>
-  .busca-cep {
-	max-width: 450px;
-	margin: 40px auto;
-	text-align: center;
-	background-color: #f7f8fc;
-	padding: 20px;
-	border-radius: 12px;
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+/* Define box-sizing para garantir que a largura seja respeitada corretamente */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.busca-cep {
+  max-width: 350px; /* Define a largura máxima para telas grandes */
+  width: 90%; /* Adapta a largura a 90% da tela em dispositivos menores */
+  margin: 40px auto;
+  text-align: center;
+  background-color: #f7f8fc;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Animação de foco para o campo de entrada */
+.cep-input {
+  width: calc(100% - 20px); /* Ajuste para respeitar o padding */
+  padding: 10px;
+  font-size: 16px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.cep-input:focus {
+  border-color: #0056d2;
+  box-shadow: 0 0 5px rgba(0, 86, 210, 0.2);
+  outline: none;
+}
+
+/* Estilo para os botões com ícones */
+.icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(100% - 20px); /* Ajuste para respeitar o padding */
+  padding: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #0056d2;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  margin: 5px auto; /* Margem vertical para separar os botões */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.icon-button:hover {
+  background-color: #007bff;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Estilos específicos para o botão de voltar */
+.voltar-button {
+  background-color: #e0e7ff;
+  color: #0056d2;
+}
+
+.voltar-button:hover {
+  background-color: #d4d9ff;
+}
+
+/* Animação de entrada para o cartão de endereço */
+.endereco-card {
+  background-color: #e0e7ff;
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 20px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  color: #333;
+  text-align: left;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: slideIn 0.4s ease forwards;
+}
+
+@keyframes slideIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  /* Animação de foco para o campo de entrada */
-  .cep-input {
-	width: 90%;
-	padding: 10px;
-	font-size: 16px;
-	margin-bottom: 10px;
-	border: 1px solid #ddd;
-	border-radius: 6px;
-	transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+/* Estilo dos itens de endereço */
+.endereco-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.endereco-item font-awesome-icon {
+  margin-right: 12px;
+  color: #0056d2;
+  font-size: 22px;
+}
+
+.endereco-item p {
+  margin: 0;
+  font-size: 16px;
+}
+
+/* Spinner de carregamento */
+.loading-spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #0056d2;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 20px auto;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
   }
-  
-  .cep-input:focus {
-	border-color: #0056d2;
-	box-shadow: 0 0 5px rgba(0, 86, 210, 0.2);
-	outline: none;
+  100% {
+    transform: rotate(360deg);
   }
-  
-  /* Estilo para os botões com ícones */
-  .icon-button {
-	display: inline-flex;
-	align-items: center;
-	padding: 10px 20px;
-	font-size: 16px;
-	font-weight: bold;
-	color: #fff;
-	background-color: #0056d2;
-	border: none;
-	border-radius: 20px;
-	cursor: pointer;
-	text-decoration: none;
-	transition: background-color 0.3s, box-shadow 0.3s;
-	margin: 5px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .icon-button:hover {
-	background-color: #007bff;
-	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  }
-  
-  /* Estilos específicos para o botão de voltar */
-  .voltar-button {
-	background-color: #e0e7ff;
-	color: #0056d2;
-  }
-  
-  .voltar-button:hover {
-	background-color: #d4d9ff;
-  }
-  
-  /* Animação de entrada para o cartão de endereço */
-  .endereco-card {
-	background-color: #e0e7ff;
-	border-radius: 10px;
-	padding: 20px;
-	margin-top: 20px;
-	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-	color: #333;
-	text-align: left;
-	opacity: 0;
-	transform: translateY(20px);
-	animation: slideIn 0.4s ease forwards;
-  }
-  
-  @keyframes slideIn {
-	to {
-	  opacity: 1;
-	  transform: translateY(0);
-	}
-  }
-  
-  /* Estilo dos itens de endereço */
-  .endereco-item {
-	display: flex;
-	align-items: center;
-	margin-bottom: 10px;
-  }
-  
-  .endereco-item font-awesome-icon {
-	margin-right: 12px;
-	color: #0056d2;
-	font-size: 22px;
-  }
-  
-  .endereco-item p {
-	margin: 0;
-	font-size: 16px;
-  }
-  
-  /* Spinner de carregamento */
-  .loading-spinner {
-	border: 4px solid #f3f3f3;
-	border-top: 4px solid #0056d2;
-	border-radius: 50%;
-	width: 40px;
-	height: 40px;
-	animation: spin 1s linear infinite;
-	margin: 20px auto;
-  }
-  
-  @keyframes spin {
-	0% {
-	  transform: rotate(0deg);
-	}
-	100% {
-	  transform: rotate(360deg);
-	}
-  }
-  
-  @media (max-width: 768px) {
-	.busca-cep {
-	  padding: 15px;
-	  margin: 20px auto;
-	}
-  
-	.cep-input,
-	.icon-button,
-	.voltar-button {
-	  width: 100%;
-	  font-size: 14px;
-	}
-  }
-  
-  .history {
-	margin-top: 20px;
-	text-align: left;
-  }
-  
-  .history h3 {
-	font-size: 16px;
-	color: #333;
-  }
-  
-  .history-item {
-	background: none;
-	border: none;
-	color: #0056d2;
-	cursor: pointer;
-	text-decoration: underline;
-	font-size: 14px;
-  }
-  
-  .history-item:hover {
-	color: #007bff;
-  }
-  
-  .map-container {
-	margin-top: 20px;
-	width: 100%;
-	height: 300px;
-  }
-  
-  .map {
-	width: 100%;
-	height: 100%;
-	border-radius: 10px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  .history-toggle {
+}
+
+/* Estilo para o botão de histórico */
+.history-toggle {
+  width: calc(100% - 20px); /* Ajuste para respeitar o padding */
   background-color: #ffaa00b4;
   color: #ffffff;
+  margin-top: 10px;
 }
 
 .history-toggle:hover {
   background-color: #ffde59;
 }
 
-  </style>
-  
+/* Responsividade para dispositivos menores */
+@media (max-width: 768px) {
+  .busca-cep {
+    padding: 15px;
+    margin: 20px auto;
+  }
+
+  .cep-input,
+  .icon-button,
+  .voltar-button,
+  .history-toggle {
+    width: calc(100% - 10px); /* Ocupa quase toda a largura em telas menores */
+    font-size: 14px;
+  }
+}
+
+/* Estilos do histórico */
+.history {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.history h3 {
+  font-size: 16px;
+  color: #333;
+}
+
+.history-item {
+  background: none;
+  border: none;
+  color: #0056d2;
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 14px;
+}
+
+.history-item:hover {
+  color: #007bff;
+}
+
+/* Container do mapa */
+.map-container {
+  margin-top: 20px;
+  width: 100%;
+  height: 300px;
+}
+
+.map {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+</style>
