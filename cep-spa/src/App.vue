@@ -39,8 +39,8 @@
 nav {
   position: fixed;
   top: 0;
-  left: 0; /* Garante que o nav começa do lado esquerdo */
-  right: 0; /* Garante que o nav termine do lado direito */
+  left: 0;
+  right: 0;
   width: 100%;
   padding: 10px 0;
   background-color: rgba(0, 0, 50, 0.8);
@@ -73,8 +73,6 @@ nav {
   overflow: hidden;
   transition: color 0.3s ease, transform 0.3s ease;
 }
-
-/* Efeito hover nos botões */
 .nav-button:hover {
   color: #ffde59;
   transform: translateY(-2px);

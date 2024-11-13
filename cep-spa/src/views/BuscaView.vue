@@ -66,8 +66,8 @@
   
   <script>
   import axios from 'axios';
-  import L from 'leaflet'; // Importa o Leaflet
-  import 'leaflet/dist/leaflet.css'; // Importa o CSS do Leaflet
+  import L from 'leaflet';
+  import 'leaflet/dist/leaflet.css';
   
   export default {
 	data() {
@@ -105,7 +105,7 @@
 			} else {
 			  this.endereco = response.data;
 			  this.addToHistory(this.cep);
-			  this.loadMap(); // Carrega o mapa com o endereço obtido
+			  this.loadMap(); // carrega mapa 
 			}
 		  })
 		  .catch((error) => {
@@ -131,13 +131,13 @@
   		},
 	  loadMap() {
 		if (this.map) {
-		  this.map.remove(); // Remove o mapa anterior se houver
+		  this.map.remove(); 
 		}
   
 		const { localidade: city, uf: state } = this.endereco;
 		const address = `${city}, ${state}`;
   
-		// Geocoding com Nominatim para obter latitude e longitude
+		// Geocoding com Nominatim
 		axios
 		  .get(`https://nominatim.openstreetmap.org/search?format=json&q=${address}`)
 		  .then((response) => {
@@ -175,8 +175,8 @@
 }
 
 .busca-cep {
-  max-width: 350px; /* Define a largura máxima para telas grandes */
-  width: 90%; /* Adapta a largura a 90% da tela em dispositivos menores */
+  max-width: 350px; 
+  width: 90%; 
   margin: 40px auto;
   text-align: center;
   background-color: #f7f8fc;
@@ -187,7 +187,7 @@
 
 /* Animação de foco para o campo de entrada */
 .cep-input {
-  width: calc(100% - 20px); /* Ajuste para respeitar o padding */
+  width: calc(100% - 20px);
   padding: 10px;
   font-size: 16px;
   margin-bottom: 10px;
@@ -218,7 +218,7 @@
   cursor: pointer;
   text-decoration: none;
   transition: background-color 0.3s, box-shadow 0.3s;
-  margin: 5px auto; /* Margem vertical para separar os botões */
+  margin: 5px auto;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -298,7 +298,7 @@
 
 /* Estilo para o botão de histórico */
 .history-toggle {
-  width: calc(100% - 20px); /* Ajuste para respeitar o padding */
+  width: calc(100% - 20px); 
   background-color: #ffaa00b4;
   color: #ffffff;
   margin-top: 10px;
@@ -319,7 +319,7 @@
   .icon-button,
   .voltar-button,
   .history-toggle {
-    width: calc(100% - 10px); /* Ocupa quase toda a largura em telas menores */
+    width: calc(100% - 10px);
     font-size: 14px;
   }
 }

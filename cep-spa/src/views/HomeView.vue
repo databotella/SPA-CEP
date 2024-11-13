@@ -19,7 +19,7 @@ export default {
 </script>
 
 <style scoped>
-/* Animação de Fade-In para o conteúdo */
+/* Animação de Fade-In */
 .fade-in {
   opacity: 0;
   animation: fadeIn 1s ease forwards;

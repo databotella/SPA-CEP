@@ -1,7 +1,7 @@
 <?php
 header("Access-Control-Allow-Origin: *"); // Permite requisições de qualquer origem
-header("Access-Control-Allow-Methods: GET, POST, OPTIONS"); // Permite métodos específicos
-header("Access-Control-Allow-Headers: Content-Type"); // Permite headers específicos
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type"); 
 // Função para validar o CEP
 function validarCEP($cep) {
 	$cep = preg_replace('/\D/', '', $cep);
