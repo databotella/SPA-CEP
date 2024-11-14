@@ -4,9 +4,10 @@ header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type"); 
 // Função para validar o CEP
 function validarCEP($cep) {
-	$cep = preg_replace('/\D/', '', $cep);
+	$cep = preg_replace('/[^0-9]/', '', $cep); // Remove qualquer caractere que não seja número
 	return strlen($cep) === 8;
 }
+
 
 // Recebe o CEP via GET
 $cep = $_GET['cep'];

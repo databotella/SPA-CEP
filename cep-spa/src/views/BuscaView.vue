@@ -3,7 +3,7 @@
 	  <h2>Buscar Endereço pelo CEP</h2>
   
 	  <!-- Campo de Input para o CEP -->
-	  <input type="text" v-model="cep" placeholder="Digite o CEP" class="cep-input" />
+	  <input type="text" v-model="cep" placeholder="Digite o CEP" class="cep-input" inputmode="numeic" @input="validarEntrada"/>
   
 	  <!-- Botão de Busca com Ícone -->
 	  <button @click="buscarCep" class="icon-button">
@@ -84,15 +84,19 @@
 	  this.history = JSON.parse(localStorage.getItem('history')) || [];
 	},
 	methods: {
-	  validarCEP(cep) {
-		cep = cep.replace(/\D/g, '');
-		return cep.length === 8;
-	  },
-	  buscarCep() {
-		if (!this.validarCEP(this.cep)) {
-		  alert('CEP inválido. Por favor, insira um CEP com 8 dígitos numéricos.');
-		  return;
-		}
+		validarEntrada(event) {
+			// Remove todos os caracteres que não são números
+			this.cep = this.cep.replace(/[^0-9]/g, '');
+		},
+		validarCEP(cep) {
+			// Verifica se tem exatamente 8 dígitos numéricos
+			return /^[0-9]{8}$/.test(cep);
+		},
+		buscarCep() {
+			if (!this.validarCEP(this.cep)) {
+			alert('CEP inválido. Por favor, insira um CEP com 8 dígitos numéricos.');
+			return;
+			}
   
 		this.loading = true;
   
